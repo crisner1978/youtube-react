@@ -9,7 +9,9 @@ function errorMiddleware(error, req, res, next) {
     res.status(error.statusCode || 500);
     res.json({
       message: error.message,
-      ...(process.env.NODE_ENV === "production" ? null : { stack: error.stack }),
+      ...(process.env.NODE_ENV === "production"
+        ? null
+        : { stack: error.stack }),
     });
   }
 }

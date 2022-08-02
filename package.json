@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Full Stack Youtube (PERN) Postgres, Express, React & Node",
   "engines": {
-    "node": "16.16.0"
+    "node": "14.17.0"
   },
   "scripts": {
     "start": "node server",
@@ -11,8 +11,8 @@
     "dev:client": "cd client && npm start",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "build": "babel --delete-dir-on-start --out-dir dist --copy-files --ignore \"**/__tests__/**, **/__mocks__/**\" --no-copy-ignored server/src",
-    "save": "prisma migrate --experimental save",
-    "up": "prisma migrate --experimental up",
+    "save": "prisma migrate save",
+    "up": "prisma migrate up",
     "generate": "prisma generate",
     "studio": "prisma studio"
   },
