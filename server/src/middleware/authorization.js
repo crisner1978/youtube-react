@@ -4,11 +4,11 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function getAuthUser(req, res, next) {
-  if (!req.headers.authorization) {
+  if (!req.cookies.token) {
     req.user = null;
     return next();
     }
-    const token = req.headers.authorization;
+    const token = req.cookies.token;
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await prisma.user.findUnique({
       where: {
@@ -23,7 +23,7 @@ export async function getAuthUser(req, res, next) {
 }
 
 export async function protect(req, res, next) {
-  if (!req.headers.authorization) {
+  if (!req.cookies.token) {
     return next({
       message: "You need to be logged in to visit this route",
       statusCode: 401,
@@ -31,7 +31,7 @@ export async function protect(req, res, next) {
   }
 
   try {
-    const token = req.headers.authorization;
+    const token = req.cookies.token;
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await prisma.user.findUnique({
       where: {
