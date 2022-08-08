@@ -62,6 +62,7 @@ async function getVideos(model, req, res) {
 }
 
 async function toggleSubscribe(req, res, next) {
+  console.log(req.params)
   if (req.user.id === req.params.userId) {
     return next({
       message: "You can not subscribe to your own channel",

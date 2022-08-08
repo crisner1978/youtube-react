@@ -293,8 +293,8 @@ async function dislikeVideo(req, res, next) {
     });
   }
 
-  const isLiked = await isLiked(req, prisma);
-  const isDisliked = await isDisliked(req, prisma);
+  const isLiked = await getIsLiked(req, prisma);
+  const isDisliked = await getIsDisliked(req, prisma);
 
   if (isDisliked) {
     await prisma.videoLike.delete({
@@ -328,7 +328,6 @@ async function dislikeVideo(req, res, next) {
       },
     });
   }
-
   res.status(200).json({});
 }
 
