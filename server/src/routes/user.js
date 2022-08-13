@@ -365,7 +365,7 @@ async function getProfile(req, res, next) {
 }
 
 async function editUser(req, res) {
-  const { username, email, cover, avatar, about } = req.body;
+  const { username, cover, avatar, about } = req.body;
 
   const user = await prisma.user.update({
     where: {
@@ -373,7 +373,6 @@ async function editUser(req, res) {
     },
     data: {
       username,
-      email,
       cover,
       avatar,
       about,
